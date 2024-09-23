@@ -6,12 +6,16 @@ import Generator from '../components/Generator'
 import '../message.css'
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
+import { listAllModels } from '@/utils/openAI';
+
 ---
 
 <Layout title="Gemini Pro Chat">
   <main >
     <Header />
     <Generator client:load />
+    <button id="listModelsButton">List Available Models</button>
+
   </main>
   <Footer />
 </Layout>
@@ -33,4 +37,8 @@ async function checkCurrentAuth() {
     window.location.href = '/password'
 }
 checkCurrentAuth()
+const listModelsButton = document.getElementById('listModelsButton');
+if (listModelsButton) {
+  listModelsButton.addEventListener('click', listAllModels);
+}
 </script>
