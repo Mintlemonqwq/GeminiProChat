@@ -8,9 +8,9 @@ const genAI = apiBaseUrl
   ? new GoogleGenerativeAI(apiKey, apiBaseUrl)
   : new GoogleGenerativeAI(apiKey)
 
-export function listAllModels() {
+export async function listAllModels() {
   try {
-    const models = genAI.listModels();
+    const models = await genAI.listModels();
     let modelListHTML = '';
     for (const model of models) {
       modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
