@@ -6,7 +6,6 @@ import Generator from '../components/Generator'
 import '../message.css'
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
-import { listAllModels } from '@/utils/openAI';
 
 ---
 
@@ -37,10 +36,11 @@ async function checkCurrentAuth() {
     window.location.href = '/password'
 }
 checkCurrentAuth()
-document.addEventListener('DOMContentLoaded', () => {
-  const listModelsButton = document.getElementById('listModelsButton');
-  if (listModelsButton) {
-    listModelsButton.addEventListener('click', listAllModels);
-  }
-});
+import { listAllModels } from '@/utils/openAI';
+  document.addEventListener('DOMContentLoaded', () => {
+    const listModelsButton = document.getElementById('listModelsButton');
+    if (listModelsButton) {
+      listModelsButton.addEventListener('click', listAllModels);
+    }
+  });
 </script>
