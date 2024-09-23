@@ -7,6 +7,7 @@ import Picture from './icons/Picture'
 import MessageItem from './MessageItem'
 import ErrorMessageItem from './ErrorMessageItem'
 import type { ChatMessage, ErrorMessage } from '@/types'
+import { genAI } from '@/utils/openAI';
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -45,7 +46,23 @@ export default () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
     })
   })
+  
+  export async function listAllModels() {
+  try {
+    const models = await genAI.listModels();
+    let modelListHTML = '';
+    for (const model of models) {
+      modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
+    }
 
+    // 使用 alert 弹框显示模型列表
+    alert(modelListHTML);
+  } catch (exception) {
+    // 使用 alert 弹框显示错误信息
+    alert(`Error listing models: ${exception}`);
+  }
+}
+  
   const handleBeforeUnload = () => {
     localStorage.setItem('messageList', JSON.stringify(messageList()))
     isStick() ? localStorage.setItem('stickToBottom', 'stick') : localStorage.removeItem('stickToBottom')
