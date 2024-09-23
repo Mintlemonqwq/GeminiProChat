@@ -6,8 +6,10 @@ import Generator from '../components/Generator'
 import '../message.css'
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
+import { GoogleGenerativeAI } from '@fuyun/generative-ai'
 
----
+const apiKey = (import.meta.env.GEMINI_API_KEY)
+const genAI = new GoogleGenerativeAI(apiKey)
 
 <Layout title="Gemini Pro Chat">
   <main >
@@ -36,7 +38,7 @@ async function checkCurrentAuth() {
     window.location.href = '/password'
 }
 checkCurrentAuth()
-import { listAllModels } from '@/utils/openAI';
+
 document.addEventListener('DOMContentLoaded', () => {
   
 
@@ -45,4 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
     listModelsButton.addEventListener('click', listAllModels);
   }
 });
+
+listAllModels() {
+  try {
+    const models = genAI.listModels();
+    let modelListHTML = '';
+    for (const model of models) {
+      modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
+    }
+
+    // 使用 alert 弹框显示模型列表
+    alert(modelListHTML);
+
+  } catch (exception) {
+    // 使用 alert 弹框显示错误信息
+    alert(`Error listing models: ${exception}`);
+  }
+}
 </script>
