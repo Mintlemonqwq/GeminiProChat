@@ -8,6 +8,17 @@ const genAI = apiBaseUrl
   ? new GoogleGenerativeAI(apiKey, apiBaseUrl)
   : new GoogleGenerativeAI(apiKey)
 
+export async function listAllModels() {
+  try {
+    const models = await genAI.listModels(); // Assuming genAI is available in this file
+    for (const model of models) {
+      console.log(`Name: ${model.name}, Display Name: ${model.display_name}`);
+    }
+  } catch (exception) {
+    console.error('Error listing models:', exception);
+  }
+}
+
 export const startChatAndSendMessageStream = async(history: ChatMessage[], newMessage: string) => {
   const model = genAI.getGenerativeModel({ model: modelenv })
 
