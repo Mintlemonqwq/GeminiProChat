@@ -37,8 +37,13 @@ async function checkCurrentAuth() {
     window.location.href = '/password'
 }
 checkCurrentAuth()
-const listModelsButton = document.getElementById('listModelsButton');
-if (listModelsButton) {
-  listModelsButton.addEventListener('click', listAllModels);
-}
+
+  import { listAllModels } from '@/utils/openAI';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const listModelsButton = document.getElementById('listModelsButton');
+    if (listModelsButton) {
+      listModelsButton.addEventListener('click', listAllModels);
+    }
+  });
 </script>
