@@ -10,12 +10,18 @@ const genAI = apiBaseUrl
 
 export async function listAllModels() {
   try {
-    const models = await genAI.listModels(); // Assuming genAI is available in this file
+    const models = await genAI.listModels();
+    let modelListHTML = '';
     for (const model of models) {
-      console.log(`Name: ${model.name}, Display Name: ${model.display_name}`);
+      modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
     }
+
+    // 使用 alert 弹框显示模型列表
+    alert(modelListHTML);
+
   } catch (exception) {
-    console.error('Error listing models:', exception);
+    // 使用 alert 弹框显示错误信息
+    alert(`Error listing models: ${exception}`);
   }
 }
 
