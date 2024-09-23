@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@fuyun/generative-ai'
 
 const apiKey = (import.meta.env.GEMINI_API_KEY)
+const modelenv = import.meta.env.GEMINI_API_MODEL || 'gemini-pro'; // 设置默认值
 const apiBaseUrl = (import.meta.env.API_BASE_URL)?.trim().replace(/\/$/, '')
 
 const genAI = apiBaseUrl
@@ -8,7 +9,7 @@ const genAI = apiBaseUrl
   : new GoogleGenerativeAI(apiKey)
 
 export const startChatAndSendMessageStream = async(history: ChatMessage[], newMessage: string) => {
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+  const model = genAI.getGenerativeModel({ model: modelenv })
 
   const chat = model.startChat({
     history: history.map(msg => ({
