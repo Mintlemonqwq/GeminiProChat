@@ -36,11 +36,12 @@ async function checkCurrentAuth() {
     window.location.href = '/password'
 }
 checkCurrentAuth()
-import { listAllModels } from '@/utils/openAI';
-  document.addEventListener('DOMContentLoaded', () => {
-    const listModelsButton = document.getElementById('listModelsButton');
-    if (listModelsButton) {
-      listModelsButton.addEventListener('click', listAllModels);
-    }
-  });
+
+document.addEventListener('DOMContentLoaded', () => {
+  import { listAllModels } from '@/utils/openAI';
+  const listModelsButton = document.getElementById('listModelsButton');
+  if (listModelsButton) {
+    listModelsButton.addEventListener('click', listAllModels);
+  }
+});
 </script>
