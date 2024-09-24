@@ -39,16 +39,7 @@ async function checkCurrentAuth() {
 }
 checkCurrentAuth()
 
-document.addEventListener('DOMContentLoaded', () => {
-  
-
-  const listModelsButton = document.getElementById('listModelsButton');
-  if (listModelsButton) {
-    listModelsButton.addEventListener('click', listAllModels);
-  }
-})
-
-listAllModels() {
+function listAllModels() {
   try {
     const models = genAI.listModels();
     let modelListHTML = '';
@@ -63,5 +54,14 @@ listAllModels() {
     // 使用 alert 弹框显示错误信息
     alert(`Error listing models: ${exception}`);
   }
-};
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const listModelsButton = document.getElementById('listModelsButton');
+  if (listModelsButton) {
+    listModelsButton.addEventListener('click', listAllModels);
+  }
+});
+
+
 </script>
