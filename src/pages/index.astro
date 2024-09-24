@@ -43,9 +43,22 @@ checkCurrentAuth();
 
 async function listAllModels() {
   try {
-    const models =  await genAI.listModels();
+    let pageToken = null;
+    let allModels = [];
+
+    do {
+      const response = await genAI.listModels({
+        pageSize: 100, // 每页获取 100 个模型
+        pageToken,
+      });
+
+      allModels = allModels.concat(response.models);
+      pageToken = response.nextPageToken;
+    } while (pageToken);
+
+    // 将模型信息格式化为 HTML 字符串
     let modelListHTML = '';
-    for (const model of models) {
+    for (const model of allModels) {
       modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
     }
 
