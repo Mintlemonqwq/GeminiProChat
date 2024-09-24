@@ -8,7 +8,6 @@ import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
 ---
 
-
 <Layout title="Gemini Pro Chat">
   <main >
     <Header />
@@ -20,7 +19,6 @@ import 'highlight.js/styles/atom-one-dark.css'
 </Layout>
 
 <script>
-
 async function checkCurrentAuth() {
   const password = localStorage.getItem('pass')
   const response = await fetch('/api/auth', {
@@ -39,10 +37,14 @@ async function checkCurrentAuth() {
 checkCurrentAuth();
 
 async function listAllModels() {
-  alert('gemini-pro-1.5');
+  try {
+    alert('gemini-pro-1.5');
+
   } catch (exception) {
+
     // 使用 alert 弹框显示错误信息
     alert('Error listing models: ${exception}');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
