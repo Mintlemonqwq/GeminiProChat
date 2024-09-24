@@ -8,8 +8,7 @@ import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import { GoogleGenerativeAI } from '@fuyun/generative-ai'
 
-const apiKey = (import.meta.env.GEMINI_API_KEY)
-const genAI = new GoogleGenerativeAI(apiKey)
+
 
 <Layout title="Gemini Pro Chat">
   <main >
@@ -22,6 +21,9 @@ const genAI = new GoogleGenerativeAI(apiKey)
 </Layout>
 
 <script>
+const apiKey = (import.meta.env.GEMINI_API_KEY)
+const genAI = new GoogleGenerativeAI(apiKey)
+
 async function checkCurrentAuth() {
   const password = localStorage.getItem('pass')
   const response = await fetch('/api/auth', {
@@ -37,11 +39,11 @@ async function checkCurrentAuth() {
   if (responseJson.code !== 0)
     window.location.href = '/password'
 }
-checkCurrentAuth()
+checkCurrentAuth();
 
-function listAllModels() {
+async function listAllModels() {
   try {
-    const models = genAI.listModels();
+    const models =  await genAI.listModels();
     let modelListHTML = '';
     for (const model of models) {
       modelListHTML += `<p>Name: ${model.name}, Display Name: ${model.display_name}</p>`;
