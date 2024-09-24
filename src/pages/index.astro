@@ -20,9 +20,6 @@ import 'highlight.js/styles/atom-one-dark.css'
 </Layout>
 
 <script>
-import { GoogleGenerativeAI } from '@fuyun/generative-ai'
-const apiKey = (import.meta.env.GEMINI_API_KEY)
-const genAI = new GoogleGenerativeAI(apiKey)
 
 async function checkCurrentAuth() {
   const password = localStorage.getItem('pass')
@@ -43,12 +40,9 @@ checkCurrentAuth();
 
 async function listAllModels() {
   alert('gemini-pro-1.5');
-
-
   } catch (exception) {
     // 使用 alert 弹框显示错误信息
     alert('Error listing models: ${exception}');
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
